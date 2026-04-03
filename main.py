@@ -783,7 +783,6 @@ async def log_request(request: Request, call_next):
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request, exc):
-    error_json_str = json.dumps(exc.json(indent=None))
     return JSONResponse(status_code=400, 
         content={'message': str(exc)})
 

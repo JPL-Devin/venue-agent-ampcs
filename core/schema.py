@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, Extra
+from pydantic import BaseModel, Field
 from typing import List, Union
 from enum import Enum
 

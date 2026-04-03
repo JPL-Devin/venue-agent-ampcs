@@ -2,7 +2,7 @@ import pytest
 from datetime import datetime, timezone, timedelta
 import time
 import sys
-import venue_client as vc
+from . import venue_client as vc
 
 @pytest.fixture(scope='module')
 def mtak_proc():

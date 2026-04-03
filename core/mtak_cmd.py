@@ -4,20 +4,28 @@ from .mtak_funcs import mtak_startup_timeout_, \
   mtak_send_fsw_cmd_, mtak_send_hw_cmd_, mtak_send_sse_cmd_, \
   mtak_send_fsw_file_, mtak_send_fsw_scmf_
 from datetime import datetime, timezone
-import mtak.wrapper as mtk
+try:
+    import mtak.wrapper as mtk
+except ImportError:
+    mtk = None  # Will be mocked in tests
 import signal
 from .core_utils import TimeoutError, get_last_error_from_logs, get_utc_iso
 import logging
 import atexit
 logger = logging.getLogger(__name__)
-mtak_worker = WorkerProcess('mtak-worker')
 
-# A hook to shutdown any MTAK processes automatically when the main Python process exits.
-# This is useful for Ingenium custom scripts that use this code as a library.
-# Without this hook, when an Ingenium custom script that started MTAK ends without explicitly shutting down MTAK, 
-# MtakDownlinkServerApp process may hang around.
-# See ING-4470
-atexit.register(mtak_worker.shutdown)
+# Guard module-level WorkerProcess creation so imports don't fail in CI/test
+# where AMPCS is not installed. The worker is only needed at runtime.
+try:
+    mtak_worker = WorkerProcess('mtak-worker')
+    # A hook to shutdown any MTAK processes automatically when the main Python process exits.
+    # This is useful for Ingenium custom scripts that use this code as a library.
+    # Without this hook, when an Ingenium custom script that started MTAK ends without explicitly shutting down MTAK, 
+    # MtakDownlinkServerApp process may hang around.
+    # See ING-4470
+    atexit.register(mtak_worker.shutdown)
+except Exception:
+    mtak_worker = None
 
 '''
 Functions for starting/shutting down mtak and dispatching mtak commands

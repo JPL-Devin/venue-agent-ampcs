@@ -3,7 +3,10 @@
 
 import traceback
 from file_read_backwards import FileReadBackwards
-import mtak.wrapper as mtk
+try:
+    import mtak.wrapper as mtk
+except ImportError:
+    mtk = None  # Will be mocked in tests
 import time
 
 import logging

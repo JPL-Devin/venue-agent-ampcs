@@ -1,4 +1,4 @@
-import venue_client as vc
+from . import venue_client as vc
 
 
 def test_start_shutdown():
