@@ -47,6 +47,9 @@ def get_decoded_token (authorization_header):
     logger.error(msg)
     raise Exception(msg)
 
+  if exec_venue_public_pem is None:
+    raise Exception('JWT public key is not loaded. Check that exec_venue_public_pem.pem exists.')
+
   # This may throw an exception.
   # The caller should handle it
   jwt_decoded = jwt.decode(
