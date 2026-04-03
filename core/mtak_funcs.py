@@ -41,6 +41,10 @@ def get_last_error_from_logs (filepath):
 
   return ''
 
+def _get_mtk_log_file():
+  """Safely get the MTAK log file path, returning None if mtk is not available."""
+  return mtk._logFile if mtk is not None else None
+
 def get_mtak_error(error, mtak_log_path):
   if mtak_log_path:
     error_in_log = get_last_error_from_logs(mtak_log_path)
@@ -66,11 +70,11 @@ def mtak_startup_timeout_(sessionIds, defaultCmdString):
       throwOnError=True
     )
   except SystemExit:
-    error = get_mtak_error(f'mtak_startup_timeout_ SystemExit: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'mtak_startup_timeout_ SystemExit: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   except Exception as ex:
-    error = get_mtak_error(f'Error in mtak_startup_timeout_: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'Error in mtak_startup_timeout_: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
 
@@ -87,11 +91,11 @@ def mtak_send_fsw_cmd_(sessionId, cmdString, stringSelection, validate):
                                 sessionKey=sessionId)
     return (output, None)
   except SystemExit as ex:
-    error = get_mtak_error(f'mtak_send_fsw_cmd_ SystemExit: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'mtak_send_fsw_cmd_ SystemExit: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   except Exception as ex:
-    error = get_mtak_error(f'Error in mtak_send_fsw_cmd_: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'Error in mtak_send_fsw_cmd_: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
 
@@ -105,11 +109,11 @@ def mtak_send_hw_cmd_(sessionId, cmdStem, stringSelection):
                             sessionKey=sessionId)
     return (output, None)
   except SystemExit as ex:
-    error = get_mtak_error(f'mtak_send_hw_cmd_ SystemExit: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'mtak_send_hw_cmd_ SystemExit: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   except Exception as ex:
-    error = get_mtak_error(f'Error in mtak_send_hw_cmd_: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'Error in mtak_send_hw_cmd_: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   
@@ -127,11 +131,11 @@ def mtak_send_sse_cmd_(sessionId, cmdString):
                                 sessionKey=sessionId)
       return (output, None)
   except SystemExit as ex:
-    error = get_mtak_error(f'mtak_send_sse_cmd_ SystemExit: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'mtak_send_sse_cmd_ SystemExit: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   except Exception as ex:
-    error = get_mtak_error(f'Error in mtak_send_sse_cmd_: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'Error in mtak_send_sse_cmd_: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
     
@@ -148,11 +152,11 @@ def mtak_send_fsw_file_(sessionId, sourcePath, targetLoc, fileType, overwrite, s
                                  sessionKey=sessionId)
     return (output, None)
   except SystemExit as ex:
-    error = get_mtak_error(f'mtak_send_fsw_file_ SystemExit: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'mtak_send_fsw_file_ SystemExit: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   except Exception as ex:
-    error = get_mtak_error(f'Error in mtak_send_fsw_file_: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'Error in mtak_send_fsw_file_: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   
@@ -167,10 +171,10 @@ def mtak_send_fsw_scmf_(sessionId, filePath, disableChecks):
     
     return (output, None)
   except SystemExit as ex:
-    error = get_mtak_error(f'mtak_send_fsw_scmf_ SystemExit: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'mtak_send_fsw_scmf_ SystemExit: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
   except Exception as ex:
-    error = get_mtak_error(f'Error in mtak_send_fsw_scmf_: ${traceback.format_exc()}', mtk._logFile)
+    error = get_mtak_error(f'Error in mtak_send_fsw_scmf_: ${traceback.format_exc()}', _get_mtk_log_file())
     logger.error(error)
     return (False, error)
