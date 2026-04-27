@@ -31,7 +31,7 @@ def _init_mtak_worker():
         atexit.register(worker.shutdown)
         return worker
     except Exception:
-        logger.warning('Failed to initialize MTAK worker process. MTAK operations will not be available.')
+        logger.warning('Failed to initialize MTAK worker process. MTAK operations will not be available.', exc_info=True)
         return None
 
 mtak_worker = _init_mtak_worker()

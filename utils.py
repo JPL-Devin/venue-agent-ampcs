@@ -25,7 +25,7 @@ try:
   logger.info(f'public key crc32: {key_crc32}')
 except Exception as ex:
   msg = f'Failed to load JWT public key from {public_pem_path}'
-  logger.warning(msg)
+  logger.warning(msg, exc_info=True)
 
 # This function is use to print key info after log file handler is initialized
 def print_key_info():
