@@ -1,0 +1,30 @@
+# ingenium_core_server - DeepWiki
+
+Wiki documentation for [JPL-Devin/ingenium_core_server](https://github.com/JPL-Devin/ingenium_core_server)
+
+## Pages
+
+- [Ingenium Core Server — Overview](ingenium-core-server-overview.md)
+- [Getting Started](getting-started.md)
+- [CI/CD Pipeline](cicd-pipeline.md)
+- [Core Architecture](core-architecture.md)
+- [Server Bootstrap and Middleware (index.js)](server-bootstrap-and-middleware-indexjs.md)
+- [node_funcs — Core Business Logic Module](node_funcs-core-business-logic-module.md)
+- [Configuration and Environment Variables](configuration-and-environment-variables.md)
+- [OpenAPI Specification (swagger.yaml)](openapi-specification-swaggeryaml.md)
+- [API Controllers — Architecture Pattern](api-controllers-architecture-pattern.md)
+- [Execution Domain Controllers](execution-domain-controllers.md)
+- [Procedure Domain Controllers](procedure-domain-controllers.md)
+- [Venue and Environment Controllers](venue-and-environment-controllers.md)
+- [Step Type Controllers — Commanding](step-type-controllers-commanding.md)
+- [Step Type Controllers — Verification and Configuration](step-type-controllers-verification-and-configuration.md)
+- [Step Type Controllers — Data, Timing, and Manual Steps](step-type-controllers-data-timing-and-manual-steps.md)
+- [Procedure-Scoped Step Controllers](procedure-scoped-step-controllers.md)
+- [Step Definitions and Search Definitions](step-definitions-and-search-definitions.md)
+- [Step Type Reference](step-type-reference.md)
+- [Element Hierarchy and Positioning](element-hierarchy-and-positioning.md)
+- [Testing](testing.md)
+- [Python CI Test Suite](python-ci-test-suite.md)
+- [Execution Examples and Stress Tests](execution-examples-and-stress-tests.md)
+- [JavaScript Test Utilities](javascript-test-utilities.md)
+- [Glossary](glossary.md)

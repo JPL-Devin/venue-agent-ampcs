@@ -1,0 +1,31 @@
+# ingenium_archive - DeepWiki
+
+Wiki documentation for [JPL-Devin/ingenium_archive](https://github.com/JPL-Devin/ingenium_archive)
+
+## Pages
+
+- [Ingenium Archive Service — Overview](ingenium-archive-service-overview.md)
+- [Getting Started](getting-started.md)
+- [Architecture Overview](architecture-overview.md)
+- [Core API Logic](core-api-logic.md)
+- [base_funcs.js — Database Utilities and Graph Primitives](base_funcsjs-database-utilities-and-graph-primitives.md)
+- [node_funcs.js — Execution Lifecycle and Venue Management](node_funcsjs-execution-lifecycle-and-venue-management.md)
+- [procedure_funcs.js — Procedure Authoring and Versioning](procedure_funcsjs-procedure-authoring-and-versioning.md)
+- [HTTP Controllers Layer](http-controllers-layer.md)
+- [Execution Controllers](execution-controllers.md)
+- [Procedure Controllers](procedure-controllers.md)
+- [Venue, Health, and Logging Controllers](venue-health-and-logging-controllers.md)
+- [API Specification (Swagger / OpenAPI)](api-specification-swagger-openapi.md)
+- [Authentication and Authorization](authentication-and-authorization.md)
+- [Audit Logging Middleware](audit-logging-middleware.md)
+- [Database Layer](database-layer.md)
+- [Data Model: Collections and Graphs](data-model-collections-and-graphs.md)
+- [ArangoDB Configuration and Docker Images](arangodb-configuration-and-docker-images.md)
+- [Database Administration Scripts](database-administration-scripts.md)
+- [Deployment and CI/CD](deployment-and-cicd.md)
+- [Docker Containerization](docker-containerization.md)
+- [Jenkins CI/CD Pipeline](jenkins-cicd-pipeline.md)
+- [Testing](testing.md)
+- [Python Integration Tests](python-integration-tests.md)
+- [JavaScript Database Exploration Scripts](javascript-database-exploration-scripts.md)
+- [Glossary](glossary.md)
