@@ -43,7 +43,7 @@ class TestFswCmdBodyModel:
         assert model.validate_ is True  # default
 
     def test_alias_validate_works(self):
-        model = FswCmdBodyModel.model_validate({
+        model = FswCmdBodyModel(**{
             'sessionId': 1,
             'commandString': 'CMD_NO_OP',
             'validate': False

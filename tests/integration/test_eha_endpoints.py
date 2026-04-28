@@ -6,7 +6,7 @@ from unittest.mock import patch
 class TestEhaRealtime:
     def test_eha_realtime_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/eha/realtime',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'channelId': 'CH-0001',
                 'startTime': '2024-001T12:00:00',
@@ -22,7 +22,7 @@ class TestEhaRealtime:
         """Returns 200 with empty list when no EHA data matches."""
         with patch('core.venue_core.get_rt_eha', return_value=[]):
             response = client.request('GET', '/api/v3/eha/realtime',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'channelId': 'CH-9999',
                     'startTime': '2024-001T12:00:00',
@@ -37,7 +37,7 @@ class TestEhaRealtime:
 class TestEhaRealtimeMulti:
     def test_eha_realtime_multi_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/eha/realtime_multi',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'channelIds': ['CH-0001'],
                 'startTime': '2024-001T12:00:00',
@@ -83,7 +83,7 @@ class TestEhaRealtimeMulti:
         ]
         with patch('core.venue_core.get_rt_eha_multi', return_value=multi_eha):
             response = client.request('GET', '/api/v3/eha/realtime_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'channelIds': ['CH-0001', 'CH-0002', 'CH-0003'],
                     'startTime': '2024-001T12:00:00',
@@ -103,7 +103,7 @@ class TestEhaRealtimeMulti:
         """Multi EHA query returns 200 with empty list when nothing matches."""
         with patch('core.venue_core.get_rt_eha_multi', return_value=[]):
             response = client.request('GET', '/api/v3/eha/realtime_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'channelIds': ['NONEXISTENT_CH'],
                     'startTime': '2024-001T12:00:00',
@@ -118,7 +118,7 @@ class TestEhaRealtimeMulti:
 class TestEhaChill:
     def test_eha_chill_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/eha/chill',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'channelIds': ['CH-0001'],
                 'timeout': 60,
@@ -130,7 +130,7 @@ class TestEhaChill:
         """Chill EHA query returns 200 with empty list when no data matches."""
         with patch('core.venue_core.get_chill_eha', return_value=[]):
             response = client.request('GET', '/api/v3/eha/chill',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'channelIds': ['CH-9999'],
                     'timeout': 60,
@@ -143,7 +143,7 @@ class TestEhaChill:
 class TestEhaChillMulti:
     def test_eha_chill_multi_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/eha/chill_multi',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'channelIds': ['CH-0001'],
                 'timeout': 60,
@@ -177,7 +177,7 @@ class TestEhaChillMulti:
         ]
         with patch('core.venue_core.get_chill_eha_multi', return_value=multi_eha):
             response = client.request('GET', '/api/v3/eha/chill_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'channelIds': ['CH-0001', 'CH-0010'],
                     'timeout': 60,
@@ -194,7 +194,7 @@ class TestEhaChillMulti:
         """Chill multi query returns 200 with empty list when nothing matches."""
         with patch('core.venue_core.get_chill_eha_multi', return_value=[]):
             response = client.request('GET', '/api/v3/eha/chill_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'channelIds': ['NONEXISTENT'],
                     'timeout': 60,

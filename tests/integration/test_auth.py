@@ -23,7 +23,7 @@ class TestAuthRequired:
 
     def test_evr_realtime_no_auth_returns_401(self, client):
         response = client.request('GET', '/api/v3/evr/realtime',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'startTime': '2024-001T12:00:00',
                 'endTime': '2024-001T13:00:00',

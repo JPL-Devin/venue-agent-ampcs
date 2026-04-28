@@ -6,7 +6,7 @@ from unittest.mock import patch
 class TestDp:
     def test_dp_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/dp',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'timeout': 60,
             }),
@@ -17,7 +17,7 @@ class TestDp:
         """Returns 200 with empty list when no data products match."""
         with patch('core.venue_core.get_dp', return_value=[]):
             response = client.request('GET', '/api/v3/dp',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'timeout': 60,
                 }),
@@ -40,7 +40,7 @@ class TestDp:
         ]
         with patch('core.venue_core.get_dp', return_value=filtered_dp):
             response = client.request('GET', '/api/v3/dp',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'dpStatus': 'COMPLETE',
                     'apIds': [37],

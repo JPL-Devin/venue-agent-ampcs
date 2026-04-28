@@ -1,43 +1,6 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
+requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-py-modules = ["main", "utils"]
-
-[tool.setuptools.packages.find]
-include = ["core*"]
-
-[project]
-name = "venue-agent-ampcs"
-version = "14.1.0"
-requires-python = ">=3.9"
-dependencies = [
-    "fastapi>=0.115",
-    "uvicorn>=0.34",
-    "starlette>=0.46",
-    "pydantic>=2.0",
-    "redis>=5.0",
-    "tailer>=0.4",
-    "psutil>=6.0",
-    "bitstring>=4.0",
-    "pyaml-env>=1.2",
-    "PyYAML>=6.0",
-    "PyJWT>=2.9",
-    "cryptography>=44.0",
-    "requests>=2.32",
-    "file-read-backwards>=3.0",
-    "python-dateutil>=2.9",
-]
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=8.0",
-    "pytest-asyncio>=0.24",
-    "httpx>=0.28",
-    "pytest-cov>=6.0",
-    "respx>=0.22",
-]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

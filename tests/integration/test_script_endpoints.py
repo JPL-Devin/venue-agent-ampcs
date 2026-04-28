@@ -58,7 +58,7 @@ class TestScriptStart:
 class TestScriptStatus:
     def test_script_status_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/custom_script/status',
-            content=json.dumps({
+            data=json.dumps({
                 'scriptRunId': 'test-123',
             }),
             headers=auth_headers)
@@ -67,7 +67,7 @@ class TestScriptStatus:
     def test_script_status_missing_run_id(self, client, auth_headers):
         """Returns 400 when scriptRunId is missing from body."""
         response = client.request('GET', '/api/v3/custom_script/status',
-            content=json.dumps({}),
+            data=json.dumps({}),
             headers=auth_headers)
         assert response.status_code == 400
 
@@ -76,7 +76,7 @@ class TestScriptStatus:
         with patch('core.venue_core.get_custom_script_status',
                    side_effect=Exception('Script run not found: nonexistent-id')):
             response = client.request('GET', '/api/v3/custom_script/status',
-                content=json.dumps({
+                data=json.dumps({
                     'scriptRunId': 'nonexistent-id',
                 }),
                 headers=auth_headers)

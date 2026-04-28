@@ -6,7 +6,7 @@ from unittest.mock import patch
 class TestEvrRealtime:
     def test_evr_realtime_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/evr/realtime',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'startTime': '2024-001T12:00:00',
                 'endTime': '2024-001T13:00:00',
@@ -21,7 +21,7 @@ class TestEvrRealtime:
         """Returns 200 with empty list when no EVRs match."""
         with patch('core.venue_core.get_rt_evr', return_value=[]):
             response = client.request('GET', '/api/v3/evr/realtime',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'startTime': '2024-001T12:00:00',
                     'endTime': '2024-001T13:00:00',
@@ -35,7 +35,7 @@ class TestEvrRealtime:
 class TestEvrRealtimeMulti:
     def test_evr_realtime_multi_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/evr/realtime_multi',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'evrNames': ['EVR_TEST'],
                 'startTime': '2024-001T12:00:00',
@@ -81,7 +81,7 @@ class TestEvrRealtimeMulti:
         ]
         with patch('core.venue_core.get_rt_evr_multi', return_value=multi_evrs):
             response = client.request('GET', '/api/v3/evr/realtime_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'evrNames': ['EVR_CMD_RECEIVED', 'EVR_CMD_EXECUTED', 'EVR_HEALTH_CHECK'],
                     'startTime': '2024-001T12:00:00',
@@ -101,7 +101,7 @@ class TestEvrRealtimeMulti:
         """Multi EVR query returns 200 with empty list when nothing matches."""
         with patch('core.venue_core.get_rt_evr_multi', return_value=[]):
             response = client.request('GET', '/api/v3/evr/realtime_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'evrNames': ['NONEXISTENT_EVR'],
                     'startTime': '2024-001T12:00:00',
@@ -116,7 +116,7 @@ class TestEvrRealtimeMulti:
 class TestEvrChill:
     def test_evr_chill_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/evr/chill',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'timeout': 60,
             }),
@@ -127,7 +127,7 @@ class TestEvrChill:
         """Chill EVR query returns 200 with empty list when no EVRs match."""
         with patch('core.venue_core.get_chill_evr', return_value=[]):
             response = client.request('GET', '/api/v3/evr/chill',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'timeout': 60,
                 }),
@@ -139,7 +139,7 @@ class TestEvrChill:
 class TestEvrChillMulti:
     def test_evr_chill_multi_returns_200(self, client, auth_headers):
         response = client.request('GET', '/api/v3/evr/chill_multi',
-            content=json.dumps({
+            data=json.dumps({
                 'sessionId': 1,
                 'timeout': 60,
             }),
@@ -172,7 +172,7 @@ class TestEvrChillMulti:
         ]
         with patch('core.venue_core.get_chill_evr_multi', return_value=multi_evrs):
             response = client.request('GET', '/api/v3/evr/chill_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'evrNames': ['EVR_FSW_BOOT', 'EVR_FSW_READY'],
                     'eventIds': [1, 2],
@@ -187,7 +187,7 @@ class TestEvrChillMulti:
         """Chill multi query returns 200 with empty list when nothing matches."""
         with patch('core.venue_core.get_chill_evr_multi', return_value=[]):
             response = client.request('GET', '/api/v3/evr/chill_multi',
-                content=json.dumps({
+                data=json.dumps({
                     'sessionId': 1,
                     'evrNames': ['NONEXISTENT'],
                     'timeout': 60,
