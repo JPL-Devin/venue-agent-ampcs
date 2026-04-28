@@ -1,49 +1,31 @@
-# DeepWiki - Repository Documentation Mirror
+# DeepWiki - venue-agent-ampcs Documentation
 
+This directory contains the wiki documentation mirror for the venue-agent-ampcs repository.
 
-This directory contains wiki documentation mirrors for all accessible JPL-Devin repositories.
-Total repositories documented: **35**
+## Pages
 
+| Page | Description |
+|:-----|:------------|
+| [Overview](JPL-Devin/venue-agent-ampcs/ingenium-venueserver-overview.md) | Ingenium VenueServer overview |
+| [Getting Started](JPL-Devin/venue-agent-ampcs/getting-started-installation-and-deployment.md) | Installation and deployment |
+| [Core Module Architecture](JPL-Devin/venue-agent-ampcs/core-module-architecture.md) | Core module design |
+| [venue_core Orchestration](JPL-Devin/venue-agent-ampcs/venue_core-orchestration-layer.md) | Orchestration layer |
+| [Core Utilities and Data Models](JPL-Devin/venue-agent-ampcs/core-utilities-and-data-models-core_utils-schema-config.md) | core_utils, schema, config |
+| [MTAK Integration](JPL-Devin/venue-agent-ampcs/mtak-integration-mtak_cmd-mtak_funcs-worker_process.md) | mtak_cmd, mtak_funcs, worker_process |
+| [MTAK Session Management](JPL-Devin/venue-agent-ampcs/mtak-session-management-endpoints.md) | MTAK session endpoints |
+| [Commanding Endpoints](JPL-Devin/venue-agent-ampcs/commanding-endpoints.md) | FSW, HW, SSE command endpoints |
+| [Telemetry Query Endpoints](JPL-Devin/venue-agent-ampcs/telemetry-query-endpoints-evr-and-eha.md) | EVR and EHA endpoints |
+| [Telemetry Querying](JPL-Devin/venue-agent-ampcs/telemetry-querying-lad_query-and-chill_query.md) | lad_query and chill_query |
+| [Custom Script Execution](JPL-Devin/venue-agent-ampcs/custom-script-execution-endpoints.md) | Script execution endpoints |
+| [Data Products and 1553 Bus](JPL-Devin/venue-agent-ampcs/data-products-and-1553-bus-endpoints.md) | DP and 1553 bus endpoints |
+| [MIL-STD-1553 Bus Log Decoding](JPL-Devin/venue-agent-ampcs/mil-std-1553-bus-log-decoding.md) | 1553 bus log decoder |
+| [Authentication and Authorization](JPL-Devin/venue-agent-ampcs/authentication-and-authorization-jwt.md) | JWT auth |
+| [Environment Configuration](JPL-Devin/venue-agent-ampcs/environment-configuration.md) | Environment variables |
+| [Infrastructure](JPL-Devin/venue-agent-ampcs/infrastructure-nginx-redis-and-logging.md) | Nginx, Redis, and logging |
+| [Client Library](JPL-Devin/venue-agent-ampcs/client-library-and-example-scripts.md) | Client library and examples |
+| [REST API Reference](JPL-Devin/venue-agent-ampcs/rest-api-reference.md) | Full API reference |
+| [Testing](JPL-Devin/venue-agent-ampcs/testing.md) | Test infrastructure overview |
+| [Test Infrastructure](JPL-Devin/venue-agent-ampcs/test-infrastructure-and-integration-tests.md) | Integration tests |
+| [Glossary](JPL-Devin/venue-agent-ampcs/glossary.md) | Terms and definitions |
 
-## Repositories
-
-
-| Repository | Pages |
-|:-----------|------:|
-| [LithoSphere](JPL-Devin/LithoSphere/index.md) | 33 |
-| [MMGIS](JPL-Devin/MMGIS/index.md) | 42 |
-| [atlas](JPL-Devin/atlas/index.md) | 32 |
-| [exec-mms](JPL-Devin/exec-mms/index.md) | 39 |
-| [flexo-mms-layer1-service](JPL-Devin/flexo-mms-layer1-service/index.md) | 30 |
-| [flexo-mms-sysmlv2](JPL-Devin/flexo-mms-sysmlv2/index.md) | 26 |
-| [fpp](JPL-Devin/fpp/index.md) | 34 |
-| [fprime](JPL-Devin/fprime/index.md) | 45 |
-| [fprime-gds](JPL-Devin/fprime-gds/index.md) | 42 |
-| [fprime-pfsoc-linux](JPL-Devin/fprime-pfsoc-linux/index.md) | 11 |
-| [fprime-tools](JPL-Devin/fprime-tools/index.md) | 30 |
-| [ingenium-lib](JPL-Devin/ingenium-lib/index.md) | 20 |
-| [ingenium_archive](JPL-Devin/ingenium_archive/index.md) | 25 |
-| [ingenium_auth-service](JPL-Devin/ingenium_auth-service/index.md) | 32 |
-| [ingenium_core_server](JPL-Devin/ingenium_core_server/index.md) | 24 |
-| [ingenium_data_sync_service](JPL-Devin/ingenium_data_sync_service/index.md) | 20 |
-| [ingenium_dict_service](JPL-Devin/ingenium_dict_service/index.md) | 22 |
-| [ingenium_execution-monitor-service](JPL-Devin/ingenium_execution-monitor-service/index.md) | 19 |
-| [ingenium_execution_server](JPL-Devin/ingenium_execution_server/index.md) | 21 |
-| [ingenium_notification](JPL-Devin/ingenium_notification/index.md) | 19 |
-| [ingenium_report_server](JPL-Devin/ingenium_report_server/index.md) | 25 |
-| [ingenium_search_server](JPL-Devin/ingenium_search_server/index.md) | 22 |
-| [ingenium_ui](JPL-Devin/ingenium_ui/index.md) | 24 |
-| [interleague_scheduler](JPL-Devin/interleague_scheduler/index.md) | 23 |
-| [opera-sds](JPL-Devin/opera-sds/index.md) | 18 |
-| [opera-sds-pcm](JPL-Devin/opera-sds-pcm/index.md) | 31 |
-| [opera-sds-pge](JPL-Devin/opera-sds-pge/index.md) | 35 |
-| [pds4-jparser](JPL-Devin/pds4-jparser/index.md) | 24 |
-| [peppi](JPL-Devin/peppi/index.md) | 23 |
-| [pfsoc-fsw-linux](JPL-Devin/pfsoc-fsw-linux/index.md) | 18 |
-| [registry-api](JPL-Devin/registry-api/index.md) | 29 |
-| [validate](JPL-Devin/validate/index.md) | 33 |
-| [venue-agent](JPL-Devin/venue-agent/index.md) | 23 |
-| [venue-agent-ampcs](JPL-Devin/venue-agent-ampcs/index.md) | 21 |
-| [venue-cmd-ampcs](JPL-Devin/venue-cmd-ampcs/index.md) | 22 |
-
-**Total wiki pages: 937**
+See the full [page index](JPL-Devin/venue-agent-ampcs/index.md) for all pages.
