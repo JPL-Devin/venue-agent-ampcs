@@ -1,6 +1,9 @@
 import logging
 import sys
-from starlette.concurrency import iterate_in_threadpool
+try:
+    from starlette.concurrency import iterate_in_threadpool
+except ImportError:
+    iterate_in_threadpool = None
 
 def restore_root_logger():
     # restore root logger that was crippled by MTAK
@@ -763,9 +766,18 @@ async def log_request(request: Request, call_next):
     content_type = response.headers.get('content-type')
     response_content = ''
     if content_type and content_type.lower() == 'application/json':
-        response_body = [chunk async for chunk in response.body_iterator]
-        response.body_iterator = iterate_in_threadpool(iter(response_body))
-        response_content = b''.join(response_body).decode()
+        try:
+            response_body = [chunk async for chunk in response.body_iterator]
+            if iterate_in_threadpool is not None:
+                response.body_iterator = iterate_in_threadpool(iter(response_body))
+            else:
+                async def _body_iter():
+                    for chunk in response_body:
+                        yield chunk
+                response.body_iterator = _body_iter()
+            response_content = b''.join(response_body).decode()
+        except Exception:
+            pass
 
     log_max_chars = 1000
     if response.status_code >= 200 and response.status_code < 400:
@@ -783,7 +795,6 @@ async def log_request(request: Request, call_next):
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request, exc):
-    error_json_str = json.dumps(exc.json(indent=None))
     return JSONResponse(status_code=400, 
         content={'message': str(exc)})
 

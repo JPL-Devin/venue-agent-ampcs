@@ -13,7 +13,7 @@ server_2 = 'http://localhost:19444/api/v3'
 session_id_a = int(os.environ.get('TEST_AMPCS_SESSION_ID_A', 0))
 session_id_b = int(os.environ.get('TEST_AMPCS_SESSION_ID_B', 0))
 
-private_pem_path = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), 
+private_pem_path = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 
                                PRIVATE_PEM_FILE)
 exec_venue_private_pem_file = open(private_pem_path, 'r')
 exec_venue_private_pem = exec_venue_private_pem_file.read()

@@ -25,8 +25,7 @@ try:
   logger.info(f'public key crc32: {key_crc32}')
 except Exception as ex:
   msg = f'Failed to load JWT public key from {public_pem_path}'
-  logger.exception(msg)
-  raise Exception(msg) from ex
+  logger.warning(msg, exc_info=True)
 
 # This function is use to print key info after log file handler is initialized
 def print_key_info():
@@ -48,10 +47,13 @@ def get_decoded_token (authorization_header):
     logger.error(msg)
     raise Exception(msg)
 
+  if exec_venue_public_pem is None:
+    raise Exception('JWT public key is not loaded. Check that exec_venue_public_pem.pem exists.')
+
   # This may throw an exception.
   # The caller should handle it
   jwt_decoded = jwt.decode(
-    jwt_token, exec_venue_public_pem, algorithms='RS256')
+    jwt_token, exec_venue_public_pem, algorithms=['RS256'])
 
   return jwt_decoded
 

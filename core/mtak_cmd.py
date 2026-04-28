@@ -4,20 +4,43 @@ from .mtak_funcs import mtak_startup_timeout_, \
   mtak_send_fsw_cmd_, mtak_send_hw_cmd_, mtak_send_sse_cmd_, \
   mtak_send_fsw_file_, mtak_send_fsw_scmf_
 from datetime import datetime, timezone
-import mtak.wrapper as mtk
+try:
+    import mtak.wrapper as mtk
+except ImportError:
+    mtk = None  # Will be mocked in tests
 import signal
 from .core_utils import TimeoutError, get_last_error_from_logs, get_utc_iso
 import logging
 import atexit
 logger = logging.getLogger(__name__)
-mtak_worker = WorkerProcess('mtak-worker')
 
-# A hook to shutdown any MTAK processes automatically when the main Python process exits.
-# This is useful for Ingenium custom scripts that use this code as a library.
-# Without this hook, when an Ingenium custom script that started MTAK ends without explicitly shutting down MTAK, 
-# MtakDownlinkServerApp process may hang around.
-# See ING-4470
-atexit.register(mtak_worker.shutdown)
+def _init_mtak_worker():
+    """Lazy initializer for the MTAK worker process.
+    
+    Returns None if initialization fails (e.g. in CI/test environments),
+    but in production any failure will surface as a clear RuntimeError
+    on first use via the guard in each public function.
+    """
+    try:
+        worker = WorkerProcess('mtak-worker')
+        # A hook to shutdown any MTAK processes automatically when the main Python process exits.
+        # This is useful for Ingenium custom scripts that use this code as a library.
+        # Without this hook, when an Ingenium custom script that started MTAK ends without explicitly shutting down MTAK, 
+        # MtakDownlinkServerApp process may hang around.
+        # See ING-4470
+        atexit.register(worker.shutdown)
+        return worker
+    except Exception:
+        logger.warning('Failed to initialize MTAK worker process. MTAK operations will not be available.', exc_info=True)
+        return None
+
+mtak_worker = _init_mtak_worker()
+
+
+def _require_mtak_worker():
+    """Raise a clear error if mtak_worker was not initialized."""
+    if mtak_worker is None:
+        raise RuntimeError('MTAK worker process was not initialized. Check for errors during startup.')
 
 '''
 Functions for starting/shutting down mtak and dispatching mtak commands
@@ -45,6 +68,7 @@ def mtak_startup_timeout(sessionIds, defaultCmdString, timeout_sec):
   :param timeout_sec: timeout for mtak.wrapper.startup() (int)
   :return:
   '''
+  _require_mtak_worker()
   
   logger.info(f'Sending MTAK startup at time: {datetime.now(tz=timezone.utc).isoformat()}')
   logger.info(f'Starting MTAK session for sessionId(s): {sessionIds} timeout_sec: {timeout_sec}')
@@ -62,6 +86,7 @@ def mtak_startup_timeout(sessionIds, defaultCmdString, timeout_sec):
   return output
 
 def mtak_shutdown():
+  _require_mtak_worker()
   logger.info(f'Sending MTAK shutdown at time: {get_utc_iso()}')
   
   # Kill the worker process, which will shutdown MTAK processes.
@@ -77,6 +102,7 @@ def mtak_send_fsw_cmd(sessionId, cmdString, stringSelection, validate, timeout_s
 
   :return: success - True if command transmitted succesfully (Boolean)
   '''
+  _require_mtak_worker()
 
   logger.info(f'Sending MTAK fsw cmd at time: {get_utc_iso()} timeout_sec: {timeout_sec}')
   logger.info(f'Sending MTAK fsw cmd string: {cmdString}, with validate={validate}')
@@ -109,6 +135,7 @@ def mtak_send_hw_cmd(sessionId, cmdStem, stringSelection, timeout_sec):
 
   :return: success - True if command transmitted succesfully (Boolean)
   '''
+  _require_mtak_worker()
 
   logger.info(f'Sending MTAK hw cmd at time: {get_utc_iso()} timeout_sec: {timeout_sec}')
   logger.info(f'Sending MTAK hw cmd stem: {cmdStem}')
@@ -140,6 +167,7 @@ def mtak_send_sse_cmd(sessionId, cmdString, timeout_sec):
 
   :return: success - True if command transmitted succesfully (Boolean)
   '''
+  _require_mtak_worker()
   logger.info(f'Sending MTAK sse cmd at time: {get_utc_iso()} timeout_sec: {timeout_sec}')
   logger.info(f'Sending MTAK sse cmd string: {cmdString}')
 
@@ -172,6 +200,7 @@ def mtak_send_fsw_file(sessionId, sourcePath, targetLoc, fileType, overwrite, st
 
   :return: success - True if command transmitted succesfully (Boolean)
   '''
+  _require_mtak_worker()
   logger.info(f'Sending MTAK fsw file at time: {get_utc_iso()} timeout_sec: {timeout_sec}')
   logger.info(f'Sending MTAK fsw file sourcePath={sourcePath}, targetLoc={targetLoc}, fileType={fileType}, overwrite={overwrite}')
 
@@ -206,6 +235,7 @@ def mtak_send_scmf_file(sessionId, filePath, disableChecks, timeout_sec):
 
   :return: success - True if command transmitted succesfully (Boolean)
   '''
+  _require_mtak_worker()
 
   logger.info(f'Sending MTAK scmf cmd at time: {get_utc_iso()} timeout_sec: {timeout_sec}')
   logger.info(f'Sending MTAK scmf filePath: {filePath}  disableChecks: {disableChecks}')

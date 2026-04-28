@@ -1,4 +1,4 @@
-import venue_client as vc
+from . import venue_client as vc
 import time
 from datetime import datetime, timezone
 

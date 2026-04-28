@@ -3,7 +3,11 @@ import json
 logger = logging.getLogger(__name__)
 
 from typing import List, Dict
-from lad import client, gdsclient
+try:
+    from lad import client, gdsclient
+except ImportError:
+    client = None  # Will be mocked in tests
+    gdsclient = None
 #from lad.gdsClient import flattenDict
 from .core_utils import TimeoutError, get_sclkscet_times
 from .schema import TimeType

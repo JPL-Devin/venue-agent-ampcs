@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: Unit tests (no external dependencies)",
+    "integration: Mocked integration tests (no AMPCS needed)",
+    "live: Live integration tests (requires running VenueServer + AMPCS)",
+]
+# By default, only run unit and mocked integration tests (not live)
+addopts = "--ignore=tests/live -v"
